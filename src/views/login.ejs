@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bora Interagir</title>
+
+  <link rel="shortcut icon" href="/images/icons/favicon-32x32.png" type="image/x-icon">
+
+  <link rel="stylesheet" href="/styles/main-profile.css">
+
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Script -->
+  <script src="/scripts/login.js" defer type="module"></script>
+</head>
+<body>
+  <div class="content login">
+    <main class="log">
+      <div class="title">
+        <h1>Somos um app que temos como princípio o diálago. Venha se juntar a nós.</h1>
+        <div class="image">
+          <img src="/images/Woman-laptop.png" alt="desenho de uma mulher mexendo no notebook">
+        </div>
+      </div>
+
+      <div class="form">
+        <form action="/nameLogin/passLogin" method="POST" id="login">
+
+            <div>
+              <label for-id="name-login" class="sr-only">Digite seu nome</label>
+              <input
+              type="text"
+              name="nameLogin"
+              id="name-login"
+              placeholder="Nome"
+              >
+            </div>
+        
+            <div>
+              <label for-id="pass-login" class="sr-only">Digite sua senha</label>
+              <input
+              type="password"
+              name="passLogin"
+              id="pass-login"
+              placeholder="Senha"
+              >
+            </div>
+        
+            <button type="submit">Entrar</button>
+
+            <div class="update-pass">
+              <a href="">Esqueceu a senha?</a>
+            </div>
+        </form>
+
+        <div class="line-form"></div>
+
+      <div class="create-profile">
+        <p>Criar novo perfil</p>
+      </div>
+      </div>
+
+    </main>
+
+    <div class="modal-register">
+      <div class="register-content">
+        <div class="title-register">
+          <h1>Cadastre-se <br> <span>é muito fácil!</span></h1>
+
+          <div class="modal-close">
+            <img src="/images/icons/close.png" alt="botão fechar modal">
+          </div>
+        </div>
+
+        <div class="form-register">
+          <form id="register" action="/name/photoUrl/pass" method="POST">
+              <div class="input">
+                <label for-id="name">Adicione seu nome</label>
+                <input 
+                type="text" 
+                name="name" 
+                id="name"
+                >
+                <small class="help">Seu nome não deve conter espaços e ter no mínimo 2 caracteres. Números são permitidos somente no final do nome.</small>
+              </div>
+    
+              <div class="input">
+                <label for-id="photo-url">Adicione sua foto (Via url)</label>
+                <input 
+                type="url" 
+                name="photoUrl" 
+                id="photo-url"
+                placeholder="https://"
+                >
+              </div>
+              
+              <div class="input">
+                <label for-id="password">Crie sua senha</label>
+                <input 
+                type="password" 
+                name="pass" 
+                id="pass"
+                >
+                <small class="help">A senha deverar ter no mínimo de oito caracteres, pelo menos uma letra e um número</small>
+              </div>
+         
+              <button type="submit">Criar perfil</button>
+          </form>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+</body>
+</html>

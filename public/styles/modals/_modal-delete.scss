@@ -1,0 +1,90 @@
+.modal-delete {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.685);
+  
+  @extend .flex-secondary;
+  justify-content: center;
+
+  opacity: 0;
+  visibility: hidden;
+}
+
+.modal-delete.show {
+  opacity: 1;
+  visibility: visible;
+  z-index: 10;
+}
+
+.modal-wrapper {
+  width: min(40rem, 90rem);
+  height: 45%;
+
+  background-color: white;
+
+  border-radius: .6rem;
+
+  @extend .flex-secondary;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  padding-top: 3rem;
+  
+  .title {
+    text-align: center;
+  }
+  
+  .text {
+    width: 90%;
+    
+    font-size: 2rem;
+    text-align: center;
+  
+    padding-top: 2rem;
+  }
+  
+  .footer {
+    @extend .flex-secondary;
+    justify-content: center;
+    gap: 1rem;
+  
+    width: 100%;
+    padding-top: 3rem;
+  
+    button {
+      padding: 1.5rem;
+      font-size: 1.8rem;
+    
+      width: 42%;
+    
+      border-radius: 0.6rem;
+      border: none;
+      box-shadow: 0.1rem 0.1rem .3rem rgba(0, 0, 0, 30%);
+    
+      color: white;
+    
+      cursor: pointer;
+    }
+  
+    .cancell {
+      background-color: $color-grayishBlue;
+      
+      &:hover {
+        background-color: hsl(212, 24%, 32%);
+      }
+    }
+  
+    .delete-post {
+      background-color: $color-softRed;
+  
+      &:hover {
+        background-color: hsl(358, 53%, 56%);
+      }
+    }
+  }
+}

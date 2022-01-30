@@ -1,0 +1,27 @@
+.post {
+  @extend .grid-center;
+
+  background-color: $color-white;
+
+  width: 95%;
+
+  padding: 2rem 0;
+
+  border-radius: .6rem;
+
+  @extend .box-shadow;
+}
+
+.reply-user, .reply-profile {
+  @extend .grid-center;
+
+  background-color: white;
+
+  width: 90%;
+  
+  padding: 2rem 0;
+
+  border-radius: .6rem;
+
+  @extend .box-shadow;
+}

@@ -1,0 +1,274 @@
+@media(max-width: 1150px){
+  .footer-post {
+    .image {
+      width: 11%;
+    }
+  }
+}
+
+@media(max-width: 1100px){
+  html {
+    font-size: 60%;
+  }
+  .reply-user, .reply-profile {
+    width: 88%;
+  }
+}
+
+@media(max-width: 900px){
+  html {
+    font-size: 57%;
+  }
+}
+
+@media(max-width: 750px){
+  div.content {
+    width: 90%;
+  }
+}
+
+@media(max-width: 641px){
+  html {
+    font-size: 55%;
+  }
+  
+  div.content {
+    width: 100%;
+  }
+  
+  header {
+    padding: 2rem 1rem;
+    font-size: 1.5rem;
+
+    .header-width {
+      width: 90%;
+      gap: 4rem;
+      margin: initial;
+      padding: 0 5rem;
+
+      .message {
+        p {
+          text-align: center;
+        }
+      }
+
+      .user {
+        .name {
+          align-items: start;
+          gap: .2rem;
+        }
+      }
+    }
+  }
+  
+  .post {
+    display: block;
+
+    width: 95%;
+
+    padding: 2rem;
+    margin: auto;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin-top: 1rem;
+
+    .edit-delete {
+      gap: 1rem;
+    }
+    
+    .score {
+      width: 17%;
+      
+      flex-direction: row;
+      
+      padding: 1rem;
+      margin: inherit;
+    }
+
+    .reply {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+
+      p {
+        color: $color-moderateBlue;
+      
+        font-weight: 500;
+      
+        cursor: pointer;
+
+        &:hover {
+          color: $color-light-grayishBlue;
+        }
+      }
+    }
+  }
+  
+  .image{
+    .img-user {
+      width: 8%;
+    }
+  }
+  
+  section#reply {
+    width: 97.3%;
+
+    .reply-profile, .reply-user {
+      display: block;
+      padding: 2rem;
+    }
+  }
+
+  .footer-post {
+    display: block;
+    margin: auto;
+
+    .image {
+      width: 8%;
+      padding-left: 0;
+      margin-left: 2rem;
+    }
+
+    form {
+      width: 95%;
+      margin: auto;
+    }
+
+    button {
+      margin-right: 2rem;
+    }
+  }
+
+  .modal-reply, .modal-post {
+    &.active {
+      margin: auto;
+      display: block;
+    }
+
+    &.width {
+      width: 88%;
+      margin: inherit;
+    }
+
+    .image {
+      width: 15%;
+    }
+
+    .form-reply {
+      .post-referencie {
+        width: 100%;
+      }
+    }
+    
+    .container {
+      button {
+        padding: 1.2rem;
+      
+        border-radius: .6rem;
+        border: none;
+      
+        background-color: $color-moderateBlue;
+        color: white;
+      
+        cursor: pointer;
+    
+        &:hover {
+          background-color: $color-light-grayishBlue;
+        }
+      }
+    }
+  }
+
+  .update {
+    form {
+      #update {
+        padding: 1rem;
+      }
+
+      .button-update {
+        button {
+          width: 35%;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 565px){
+  html {
+    font-size: 53%;
+  }
+
+  header {
+    .header-width {
+      width: 75%;
+      padding: 0 1rem;
+    }
+
+    .message {
+      display: none;
+    }
+  }
+
+  #reply {
+    .line {
+      left: 3rem;
+    }
+  }
+
+  
+}
+
+@media(max-width: 425px){
+  .modal-wrapper {
+    width: 95%;
+  }
+
+  .modal-reply {
+    .image {
+      padding: 0;
+      width: 9%;
+    }
+  }
+}
+
+@media(max-width: 375px){
+  .container {
+    .score {
+      width: 30%;
+    }
+    
+    .edit-delete {
+      .edit, .delete {
+        gap: .5rem
+      }
+    }
+
+  }
+
+  #reply {
+    .line {
+      left: 2.5rem;
+    }
+
+    .reply-profile {
+      .identification {
+        gap: .5rem;
+      }
+    }
+  }
+
+  .modal-reply {
+    .container {
+      button {
+        padding: 1rem;
+      }
+    }
+  }
+}

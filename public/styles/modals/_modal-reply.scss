@@ -1,0 +1,22 @@
+.modal-reply {
+ @extend .modal-center;
+ @extend .modal-image;
+
+  &.active {
+    display: flex;
+  }
+
+  &.width {
+    width: 90%;
+  }
+
+}
+
+.modal-post {
+  @extend .modal-center;
+  @extend .modal-image;
+
+  &.active {
+    display: flex;
+  }
+}

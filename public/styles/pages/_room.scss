@@ -1,0 +1,104 @@
+main {
+  &.room{
+    padding-top: 10rem;
+    padding-bottom: 2rem;
+  
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+
+  }
+}
+
+#post-content {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+#reply {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2rem;
+
+  width: 95%;
+
+  position: relative;
+
+
+  .line {
+    width: 0.2rem;
+    height: 100%;
+  
+    position: absolute;
+    top: 0;
+    left: 5rem;
+    
+    background-color: $color-lightGray;
+  }
+}
+
+.footer-post {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+
+  background-color: $color-white;
+
+  width: 95%;
+  
+  padding: 2rem 0;
+
+  border-radius: .6rem;
+
+  @extend .box-shadow;
+
+  .image {
+    @extend .flex-secondary;
+    justify-content: center;
+    padding-left: 5rem;
+    width: 10%;
+
+    img {
+      width: 100%;
+      clip-path: circle();
+    }
+  }
+
+  form {
+    width: 75%;
+    
+    textarea {
+      width: 100%;
+    
+      padding: 1rem;
+    
+      border-radius: .6rem;
+      border: .1rem solid $color-lightGray;
+    
+      resize: none;
+    
+      outline: $color-moderateBlue;
+    
+      vertical-align: baseline;
+    }
+
+  }
+
+  button {
+    padding: 1.2rem;
+  
+    border-radius: .6rem;
+    border: none;
+  
+    background-color: $color-moderateBlue;
+    color: white;
+  
+    cursor: pointer;
+
+    &.disabled {
+      filter: contrast(.6);
+    }
+  }
+}

@@ -1,0 +1,71 @@
+@media(max-width: 1310px){
+  html {
+    font-size: 56%;
+  }
+
+}
+
+@media(max-width: 1173px){
+  .create-profile {
+    width: 55%;
+  }
+}
+
+@media(max-width: 1007px){
+  .form {
+    width: 70%;
+  }
+}
+
+@media(max-width: 835px){
+  html {
+    font-size: 53%;
+  }
+  
+  .title {
+    margin: auto;
+  }
+
+  .form {
+    width: 80%;
+  }
+}
+
+@media(max-width: 800px){
+  main {
+    &.log {
+      grid-template-columns: none;
+      grid-auto-rows: 48vh;
+
+      margin-bottom: 6rem;
+    }
+  }
+
+  .image {
+    img {
+      width: 95%;
+    }
+  }
+  
+  .title {
+    h1 {
+      display: none;
+    }
+  }
+}
+
+@media(max-width: 425px){
+  html {
+    font-size: 50%;
+  }
+
+  .create-profile {
+    width: 60%;
+  }
+
+  .modal-register {
+    .register-content {
+      width: 38rem;
+    }
+  }
+}

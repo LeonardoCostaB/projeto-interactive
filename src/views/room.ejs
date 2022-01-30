@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive.app</title>
+
+  <link rel="shortcut icon" href="/images/icons/favicon-32x32.png" type="image/x-icon">
+  <!-- pages -->
+  <link rel="stylesheet" href="/styles/main.css">
+
+  <!-- font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- scripts -->
+  <script src="/scripts/room.js" defer type="module"></script>
+  
+</head>
+<body>
+  <header>
+    <div class="header-width">
+      <div class="logo">
+        <a href="/room/<%= roomId %>"><img src="/images/icons/favicon-32x32.png" alt="interactive.app">Interactive.App</a>
+      </div>
+      <div class="message">
+        <p>Seja bem vindo, <span><%= profile.name%></span></p>
+      </div>
+      <div class="user">
+        <div class="name">
+          <p><%= profile.name %></p>
+          <a href="/login">Sair</a>
+        </div>
+      </div>
+    </div>
+    
+  </header>
+
+  <div class="content">
+    <main class="room" data-id="<%= roomId %>">
+
+      <section id="post-content">
+         
+        <% post.forEach(element => { %>
+          <% if(element.room == roomId) { %>
+           
+            <div class="post profile" data-id="<%= element.id %>">
+              <div class="score">
+                <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                <p class="score-value"><%= element.score %></p>
+                <img src="/images/icons/icon-minus.svg" alt="icon-score-less">
+              </div>
+      
+              <div class="apresentation">
+                <div class="header-profile">
+                  <div class="identification">
+                    <img class="img-user" src="<%= element.photo_url %>" alt="Foto-<%= element.user %>">
+      
+                    <p class="name-user"><%= element.user %></p>
+      
+                    <p class="you">you</p>
+    
+                    <p class="timer">
+                      <%= element.remaining %>             
+                    </p>
+                  </div>
+      
+                  <div class="edit-delete">
+                    <div class="delete">
+                      <img src="/images/icons/icon-delete.svg" alt="deletar">
+    
+                      <button>Deletar</button>
+                    </div>
+                    
+                    <div class="edit">
+                      <img src="/images/icons/icon-edit.svg" alt="editar">
+                      <button>Editar</button>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="content-user">
+                  <p><%= element.content %></p>
+                </div>
+    
+                <div class="update hidde">
+                  <form action="/update/<%= element.id %>/<%= roomId %>" method="POST" id="update">
+                    <textarea 
+                    name="update" 
+                    id="update" 
+                    cols="30" 
+                    rows="10"
+                    ><%= element.content %></textarea>
+                    <div class="button-update">
+                      <button>Salvar</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+
+            <% reply.forEach(reply => { %>
+              <% if(element.id === reply.post_id) {%>
+
+                <section id="reply" data-id="<%= element.id %>">
+                  <div class="line"></div>
+
+                  <% if(reply.room == roomId) { %>
+                  
+                    <div class="reply-profile" data-id="<%= reply.id %>">
+                      <div class="score">
+                        <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                        <p class="score-value"><%= reply.score %></p>
+                        <img src="/images/icons/icon-minus.svg" alt="icon-score-less">
+                      </div>
+              
+                      <div class="apresentation">
+                        <div class="header-profile">
+                          <div class="identification">
+                            <img class="img-user" src="<%= reply.photo_url %>" alt="Foto-<%= reply.user %>">
+              
+                            <p class="name-user"><%= reply.user %></p>
+              
+                            <p class="you">you</p>
+            
+                            <p class="timer">
+                              <%= reply.remaining %>
+                            </p>
+                          </div>
+              
+                          <div class="edit-delete">
+                            <div class="delete">
+                              <img src="/images/icons/icon-delete.svg" alt="deletar">
+            
+                              <button>Deletar</button>
+                            </div>
+                            
+                            <div class="edit">
+                              <img src="/images/icons/icon-edit.svg" alt="editar">
+                              <button>Editar</button>
+                            </div>
+                          </div>
+                        </div>
+              
+                        <div class="content-user">
+                          <p><span>@<%= element.user %></span> <%= reply.content %></p>
+                        </div>
+            
+                        <div class="update hidde">
+                          <form action="/updateReply/<%= reply.id %>/<%= roomId %>" method="POST" id="update">
+                            <textarea 
+                            name="updateReply" 
+                            id="update" 
+                            cols="30" 
+                            rows="10"
+                            ><%= reply.content %></textarea>
+                            <div class="button-update">
+                              <button>Salvar</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+                    <% secondary.forEach(secondary => { %>
+                      <% if(reply.id === secondary.post_id){ %> 
+                      <% if(secondary.room == roomId) {%> 
+
+                      <div class="reply-profile" data-id="<%= secondary.id %>">
+                        <div class="score">
+                          <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                          <p class="score-value"><%= reply.score %></p>
+                          <img src="/images/icons/icon-minus.svg" alt="icon-score-less">
+                        </div>
+                
+                        <div class="apresentation">
+                          <div class="header-profile">
+                            <div class="identification">
+                              <img class="img-user" src="<%= secondary.photo_url %>" alt="Foto-<%= secondary.user %>">
+                
+                              <p class="name-user"><%= secondary.user %></p>
+                
+                              <p class="you">you</p>
+              
+                              <p class="timer">
+                                <%= secondary.remaining %>
+                              </p>
+                            </div>
+                
+                            <div class="edit-delete">
+                              <div class="delete">
+                                <img src="/images/icons/icon-delete.svg" alt="deletar">
+              
+                                <button>Deletar</button>
+                              </div>
+                              
+                              <div class="edit">
+                                <img src="/images/icons/icon-edit.svg" alt="editar">
+                                <button>Editar</button>
+                              </div>
+                            </div>
+                          </div>
+                
+                          <div class="content-user">
+                            <p><span>@<%= reply.user %></span> <%= secondary.content %></p>
+                          </div>
+              
+                          <div class="update hidde">
+                            <form action="/updateReply/<%= reply.id %>/<%= roomId %>" method="POST" id="update">
+                              <textarea 
+                              name="updateReply" 
+                              id="update" 
+                              cols="30" 
+                              rows="10"
+                              ><%= secondary.content %></textarea>
+                              <div class="button-update">
+                                <button>Salvar</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+
+                      <% } else {%>
+
+                        <div class="reply-user" data-id="<%= secondary.id %>">
+                          <div class="score">
+                            <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                            <p class="score-value"><%= secondary.score %></p>
+                            <img src="/images/icons/icon-minus.svg" alt="icon-score">
+                          </div>
+                  
+                          <div class="apresentation">
+                            <div class="header">
+                              <div class="identification">
+                                <img class="img-user" src="<%= secondary.photo_url %>" alt="user-image">
+                  
+                                <p class="name-user"><%= secondary.user %></p>
+                  
+                                <p class="timer">
+                                  <%= secondary.remaining %>
+                                </p>
+                              </div>
+                  
+                            </div>
+                  
+                            <div class="content-user">
+                              <p><span>@<%= reply.user %></span> <%= secondary.content %></p>
+                            </div>
+
+                          </div>
+                        </div>
+
+                      <% } %> 
+                      <% } %> 
+                    <% }) %> 
+
+                  <% } else { %>
+          
+                    <div class="reply-user" data-id="<%= reply.id %>">
+                    <div class="score">
+                      <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                      <p class="score-value"><%= reply.score %></p>
+                      <img src="/images/icons/icon-minus.svg" alt="icon-score">
+                    </div>
+            
+                    <div class="apresentation">
+                      <div class="header">
+                        <div class="identification">
+                          <img class="img-user" src="<%= reply.photo_url %>" alt="user-image">
+            
+                          <p class="name-user"><%= reply.user %></p>
+            
+                          <p class="timer">
+                            <%= reply.remaining %>
+                          </p>
+                        </div>
+            
+                        <div class="reply">
+                          <img src="/images/icons/icon-reply.svg" alt="reply">
+            
+                          <p>Reply</p>
+                        </div>
+                      </div>
+            
+                      <div class="content-user">
+                        <p><span>@<%= element.user %></span> <%= reply.content %></p>
+                      </div>
+                    </div>
+                    </div>
+          
+                    <div class="modal-reply" data-id="<%= reply.id %>">
+                      <div class="image">
+                        <img src="<%= profile.url %>" alt="<%= element.user %>" title="<%= element.user %>">
+                      </div>
+                
+                      <div class="form-reply">
+                        <div class="post-referencie">
+                          <p>Respondendo a @<%= reply.user %></p>
+        
+                          <form  action="/replySecondary" method="POST" id="form-secondary">
+                            <textarea name="replySecondary" id="reply-user" cols="30" rows="6"></textarea>
+                          </form>
+                        </div>
+                        
+                        <button form="form-secondary" type="submit">Responder</button>
+                      </div>
+        
+                    </div>
+
+                    <% secondary.forEach(secondary => { %>
+                      <% if(reply.id === secondary.post_id) {%> 
+                      <% if(secondary.room == roomId) {%> 
+
+                        <div class="reply-profile" data-id="<%= secondary.id %>">
+                          <div class="score">
+                            <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                            <p class="score-value"><%= reply.score %></p>
+                            <img src="/images/icons/icon-minus.svg" alt="icon-score-less">
+                          </div>
+                  
+                          <div class="apresentation">
+                            <div class="header-profile">
+                              <div class="identification">
+                                <img class="img-user" src="<%= secondary.photo_url %>" alt="Foto-<%= secondary.user %>">
+                  
+                                <p class="name-user"><%= secondary.user %></p>
+                  
+                                <p class="you">you</p>
+                
+                                <p class="timer">
+                                  <%= secondary.remaining %>
+                                </p>
+                              </div>
+                  
+                              <div class="edit-delete">
+                                <div class="delete">
+                                  <img src="/images/icons/icon-delete.svg" alt="deletar">
+                
+                                  <button>Deletar</button>
+                                </div>
+                                
+                                <div class="edit">
+                                  <img src="/images/icons/icon-edit.svg" alt="editar">
+                                  <button>Editar</button>
+                                </div>
+                              </div>
+                            </div>
+                  
+                            <div class="content-user">
+                              <p><span>@<%= reply.user %></span> <%= secondary.content %></p>
+                            </div>
+                
+                            <div class="update hidde">
+                              <form action="/updateReply/<%= reply.id %>/<%= roomId %>" method="POST" id="update">
+                                <textarea 
+                                name="updateReply" 
+                                id="update" 
+                                cols="30" 
+                                rows="10"
+                                ><%= secondary.content %></textarea>
+                                <div class="button-update">
+                                  <button>Salvar</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+
+                      <% } else {%>
+
+                        <div class="reply-user" data-id="<%= secondary.id %>">
+                          <div class="score">
+                            <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                            <p class="score-value"><%= secondary.score %></p>
+                            <img src="/images/icons/icon-minus.svg" alt="icon-score">
+                          </div>
+                  
+                          <div class="apresentation">
+                            <div class="header">
+                              <div class="identification">
+                                <img class="img-user" src="<%= secondary.photo_url %>" alt="user-image">
+                  
+                                <p class="name-user"><%= secondary.user %></p>
+                  
+                                <p class="timer">
+                                  <%= secondary.remaining %> 
+                                </p>
+                              </div>
+                
+                            </div>
+                  
+                            <div class="content-user">
+                              <p><span>@<%= reply.user %></span> <%= secondary.content %></p>
+                            </div>
+
+                          </div>
+                        </div>
+                
+                      <% } %> 
+                      <% } %> 
+                    <% }) %> 
+
+                  <% } %> 
+                </section>
+
+              <% } %>  
+            <% }) %>
+
+          <% } else { %>
+
+            <div class="post users" data-id="<%= element.id %>">
+              <div class="score">
+                  <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+
+                  <p class="score-value"><%= element.score %></p>
+
+                  <img src="/images/icons/icon-minus.svg" alt="icon-score">
+              </div>
+
+              <div class="apresentation">
+                <div class="header">
+                  <div class="identification">
+                    <img class="img-user" src="<%= element.photo_url %>" alt="user-image">
+                    <p class="name-user"><%= element.user %></p>
+                    <p class="timer">
+                      <%= element.remaining %>
+                    </p>
+                  </div>
+
+                  <div class="reply">
+                    <img src="/images//icons/icon-reply.svg" alt="reply">
+                    <p>Reply</p>
+                  </div>
+                </div>
+
+                <div class="content-user">
+                  <p><%= element.content %></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-post" data-id="<%= element.id %>">
+              <div class="image">
+                <img src="<%= profile.url %>" alt="<%= element.user %>" title="<%= element.user %>">
+              </div>
+        
+              <div class="form-reply">
+                <div class="post-referencie">
+                  <p>Respondendo a @<%= element.user %></p>
+
+                  <form action="/reply/<%= element.id %>/<%= roomId %>" method="POST" id="form-reply">
+                    <textarea name="reply" id="reply-user" cols="30" rows="6"></textarea>
+                  </form>
+                </div>
+                
+                <button form="form-reply" type="submit">Responder</button>
+              </div>
+              
+            </div>
+
+            <% reply.forEach(reply => { %>
+              <% if(element.id === reply.post_id) {%>
+
+                <section id="reply" data-id="<%= element.id %>">
+                  <div class="line"></div>
+
+                  <% if(reply.room == roomId) { %>
+                  
+                    <div class="reply-profile" data-id="<%= reply.id %>">
+                      <div class="score">
+                        <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                        <p class="score-value"><%= reply.score %></p>
+                        <img src="/images/icons/icon-minus.svg" alt="icon-score-less">
+                      </div>
+              
+                      <div class="apresentation">
+                        <div class="header-profile">
+                          <div class="identification">
+                            <img class="img-user" src="<%= reply.photo_url %>" alt="Foto-<%= reply.user %>">
+              
+                            <p class="name-user"><%= reply.user %></p>
+              
+                            <p class="you">you</p>
+            
+                            <p class="timer">
+                              <%= reply.remaining %>
+                            </p>
+                          </div>
+              
+                          <div class="edit-delete">
+                            <div class="delete">
+                              <img src="/images/icons/icon-delete.svg" alt="deletar">
+            
+                              <button>Deletar</button>
+                            </div>
+                            
+                            <div class="edit">
+                              <img src="/images/icons/icon-edit.svg" alt="editar">
+                              <button>Editar</button>
+                            </div>
+                          </div>
+                        </div>
+              
+                        <div class="content-user">
+                          <p><span>@<%= element.user %></span> <%= reply.content %></p>
+                        </div>
+                        
+                        <div class="update hidde">
+                          <form action="/updateReply/<%= reply.id %>/<%= roomId %>" method="POST" id="update">
+                            <textarea 
+                            name="updateReply" 
+                            id="update" 
+                            cols="30" 
+                            rows="10"
+                            ><%= reply.content %></textarea>
+                            <div class="button-update">
+                              <button>Salvar</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+                    <% secondary.forEach(secondary => { %>
+                      <% if(reply.id === secondary.post_id) {%> 
+                      <% if(secondary.room == roomId) {%> 
+
+                      <div class="reply-profile" data-id="<%= secondary.id %>">
+                        <div class="score">
+                          <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                          <p class="score-value"><%= reply.score %></p>
+                          <img src="/images/icons/icon-minus.svg" alt="icon-score-less">
+                        </div>
+                
+                        <div class="apresentation">
+                          <div class="header-profile">
+                            <div class="identification">
+                              <img class="img-user" src="<%= secondary.photo_url %>" alt="Foto-<%= secondary.user %>">
+                
+                              <p class="name-user"><%= secondary.user %></p>
+                
+                              <p class="you">you</p>
+              
+                              <p class="timer">
+                                <%= secondary.remaining %>
+                              </p>
+                            </div>
+                
+                            <div class="edit-delete">
+                              <div class="delete">
+                                <img src="/images/icons/icon-delete.svg" alt="deletar">
+              
+                                <button>Deletar</button>
+                              </div>
+                              
+                              <div class="edit">
+                                <img src="/images/icons/icon-edit.svg" alt="editar">
+                                <button>Editar</button>
+                              </div>
+                            </div>
+                          </div>
+                
+                          <div class="content-user">
+                            <p><span>@<%= reply.user %> </span><%= secondary.content %></p>
+                          </div>
+              
+                          <div class="update hidde">
+                            <form action="/updateReply/<%= reply.id %>/<%= roomId %>" method="POST" id="update">
+                              <textarea 
+                              name="updateReply" 
+                              id="update" 
+                              cols="30" 
+                              rows="10"
+                              ><%= secondary.content %></textarea>
+                              <div class="button-update">
+                                <button>Salvar</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+
+                      <% } else {%>
+
+                        <div class="reply-user" data-id="<%= secondary.id %>">
+                          <div class="score">
+                            <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                            <p class="score-value"><%= secondary.score %></p>
+                            <img src="/images/icons/icon-minus.svg" alt="icon-score">
+                          </div>
+                  
+                          <div class="apresentation">
+                            <div class="header">
+                              <div class="identification">
+                                <img class="img-user" src="<%= secondary.photo_url %>" alt="user-image">
+                  
+                                <p class="name-user"><%= secondary.user %></p>
+                  
+                                <p class="timer">
+                                  <%= secondary.remaining %>
+                                </p>
+                              </div>
+  
+                            </div>
+                  
+                            <div class="content-user">
+                              <p><span>@<%= reply.user %></span> <%= secondary.content %></p>
+                            </div>
+
+                          </div>
+                        </div>
+
+                      <% } %> 
+                      <% } %> 
+                    <% }) %> 
+
+                  <% } else { %>
+          
+                    <div class="reply-user" data-id="<%= reply.id %>">
+                    <div class="score">
+                      <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                      <p class="score-value"><%= reply.score %></p>
+                      <img src="/images/icons/icon-minus.svg" alt="icon-score">
+                    </div>
+            
+                    <div class="apresentation">
+                      <div class="header">
+                        <div class="identification">
+                          <img class="img-user" src="<%= reply.photo_url %>" alt="user-image">
+            
+                          <p class="name-user"><%= reply.user %></p>
+            
+                          <p class="timer">
+                            <%= reply.remaining %>
+                          </p>
+                        </div>
+            
+                        <div class="reply">
+                          <img src="/images/icons/icon-reply.svg" alt="reply">
+            
+                          <p>Reply</p>
+                        </div>
+                      </div>
+            
+                      <div class="content-user">
+                        <p><span>@<%= element.user %></span> <%= reply.content %></p>
+                      </div>
+
+                    </div>
+                    </div>
+          
+                    <div class="modal-reply" data-id="<%= reply.id %>">
+                      <div class="image">
+                        <img class="img-user" src="<%= profile.url  %>" alt="foto-usuario">
+                      </div>
+                
+                      <div class="form-reply">
+                        <div class="post-referencie">
+                          <p>Repondendo a @<%= reply.user %></p>
+                          
+                          <form action="/replySecondary" method="POST" id="form-secondary">
+                            <textarea name="replySecondary" id="reply-user" cols="30" rows="6"></textarea>
+                          </form>
+                        </div>
+                        
+                        <button form="form-secondary" type="submit">Responder</button>
+                      </div>
+  
+                    </div>
+
+                    <% secondary.forEach(secondary => { %>
+                      <% if(reply.id === secondary.post_id) {%> 
+                      <% if(secondary.room == roomId) {%> 
+
+                        <div class="reply-profile" data-id="<%= secondary.id %>">
+                          <div class="score">
+                            <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                            <p class="score-value"><%= reply.score %></p>
+                            <img src="/images/icons/icon-minus.svg" alt="icon-score-less">
+                          </div>
+                  
+                          <div class="apresentation">
+                            <div class="header-profile">
+                              <div class="identification">
+                                <img class="img-user" src="<%= secondary.photo_url %>" alt="Foto-<%= secondary.user %>">
+                  
+                                <p class="name-user"><%= secondary.user %></p>
+                  
+                                <p class="you">you</p>
+                
+                                <p class="timer">
+                                  <%= secondary.remaining %>
+                                </p>
+                              </div>
+                  
+                              <div class="edit-delete">
+                                <div class="delete">
+                                  <img src="/images/icons/icon-delete.svg" alt="deletar">
+                
+                                  <button>Deletar</button>
+                                </div>
+                                
+                                <div class="edit">
+                                  <img src="/images/icons/icon-edit.svg" alt="editar">
+                                  <button>Editar</button>
+                                </div>
+                              </div>
+                            </div>
+                  
+                            <div class="content-user">
+                              <p><span>@<%= reply.user %></span> <%= secondary.content %></p>
+                            </div>
+                
+                            <div class="update hidde">
+                              <form action="/updateReply/<%= reply.id %>/<%= roomId %>" method="POST" id="update">
+                                <textarea 
+                                name="updateReply" 
+                                id="update" 
+                                cols="30" 
+                                rows="10"
+                                ><%= secondary.content %></textarea>
+                                <div class="button-update">
+                                  <button>Salvar</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+
+                      <% } else {%>
+
+                        <div class="reply-user" data-id="<%= secondary.id %>">
+                          <div class="score">
+                            <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                            <p class="score-value"><%= secondary.score %></p>
+                            <img src="/images/icons/icon-minus.svg" alt="icon-score">
+                          </div>
+                  
+                          <div class="apresentation">
+                            <div class="header">
+                              <div class="identification">
+                                <img class="img-user" src="<%= secondary.photo_url %>" alt="user-image">
+                  
+                                <p class="name-user"><%= secondary.user %></p>
+                  
+                                <p class="timer">
+                                  <%= secondary.remaining %>
+                                </p>
+                              </div>
+                  
+                            </div>
+                  
+                            <div class="content-user">
+                              <p><span>@<%= reply.user %></span> <%= secondary.content %></p>
+                            </div>
+
+                          </div>
+                        </div>
+
+                      <% } %> 
+                      <% } %> 
+                    <% }) %> 
+
+                  <% } %> 
+                </section>
+
+              <% } %>  
+            <% }) %>
+
+          <% } %> 
+        <% }); %>
+      
+      </section>
+
+      <footer>
+        <div class="footer-post">
+          <div class="image">
+            <img src="<%= profile.url %>" alt="foto-usuario">
+          </div>
+
+          <form action="/content/<%= roomId %>/<%= profile.id %>" method="POST" id="form-footer">
+            <textarea 
+            name="content" 
+            id="content" 
+            cols="30" 
+            rows="6"
+            placeholder="O que você deseja compartilhar?"
+            ></textarea>
+
+          </form>
+          <button form="form-footer" class="disabled">Postar</button>
+
+        </div>
+      </footer>
+    </main>
+
+    <div class="modal-delete">
+      <div class="modal-wrapper">
+        <div class="title">
+          <h1>Deletar comentário</h1>
+        </div>
+
+        <div class="text">
+          <p>Tem certeza que deseja deletar este comentário? Essa ação não pode ser desfeita.</p>
+        </div>
+
+        <div class="footer">
+          <button class="cancell">Cancelar</button>
+          <button 
+          type="submit" 
+          class="delete-post"
+          form="delete-post"
+          >Excluir</button>
+        </div>
+      </div>
+      
+      <form
+      method="POST"
+      action="/delete"
+      id="delete-post"
+      >
+      </form>
+
+      <form 
+      method="POST"
+      action="/Delreply"
+      id="delete-reply">
+      </form>
+    </div>
+
+  </div>
+</body>
+</html>

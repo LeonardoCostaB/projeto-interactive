@@ -1,0 +1,134 @@
+.modal-register {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  background-color: rgba(0, 0, 0, 0.685);
+  
+  @extend .flex-secondary;
+  justify-content: center;
+
+  opacity: 0;
+  visibility: hidden;
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .register-content {
+    width: min(40rem, 90rem);
+  
+    background-color: white;
+  
+    border-radius: .6rem;
+    box-shadow: .1rem .1rem .9rem rgba(255, 255, 255, 0.349);
+  
+    @extend .flex-secondary;
+    flex-direction: column;
+    gap: 1.5rem;
+  
+    padding-top: 1rem;
+
+    .title-register {
+      width: 100%;
+    
+      position: relative;
+
+      h1 {
+        font-size: 3.2rem;
+      
+        line-height: 2.6rem;
+        text-align: center;
+
+        span {
+          font-size: 1.6rem;
+        
+          color: $color-grayishBlue;
+        }
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 10%;
+        right: 6%;
+      
+        cursor: pointer;
+      }
+    }
+
+    .form-register {
+      width: 100%;
+
+      #register {
+        width: 90%;
+        margin: auto;
+      
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        .input {
+          margin: auto;
+        
+          width: 95%;
+        
+          display: grid;
+          gap: 0.5rem;
+
+          label {
+            color: $color-grayishBlue;
+          }
+
+          input {
+            width: 100%;
+          
+            padding: 1.3rem;
+            border: .1rem solid #DDDFE2;
+          
+            color: #90949C;
+          
+            font-size: 1.6rem;
+          }
+
+          .help {
+            font-size: 1.2rem;
+            
+            color: #90949C;
+          
+            text-align: center;
+          }
+        }
+
+        p {
+          text-align: center;
+        
+          color: $color-grayishBlue;
+        
+        }
+
+        button {
+          width: 30%;
+          margin: 0 auto 1rem;
+        
+          padding: .8rem;
+        
+          border-radius: .6rem;
+          border: none;
+        
+          background-color: #7169b6;
+          color: white;
+        
+          cursor: pointer;
+
+          &:hover {
+            background-color: #8480ad;
+          }
+        }
+      }
+    }
+  }
+}
