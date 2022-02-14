@@ -1,20 +1,23 @@
 const utils = {
   score(post){
+    let cart = JSON.parse(localStorage.getItem('score')) || []
+
     const scoreUp = post.querySelector('.score img[src="/images/icons/icon-plus.svg"]')
     const scorePop = post.querySelector('.score img[src="/images/icons/icon-minus.svg"]')
     const scoreValue = post.querySelector('.score-value')
-    const score = []
+    scoreValue.innerHTML = cart.length
 
     scoreUp.onclick = () => {
-      scoreValue.innerHTML = score.push(+1)
+      cart.push(+1)
+      localStorage.setItem('score', JSON.stringify(cart))
+      scoreValue.innerHTML = cart.length
     }
 
     scorePop.onclick = () => {
-      if(score.length >= 1){
-        scoreValue.innerHTML = score.length -= 1
-      }else if(value.score === 0){
-        return value.score == 0
-      }  
+      cart.length -= 1
+      localStorage.setItem('score', JSON.stringify(cart))
+      scoreValue.innerHTML = cart.length
+
     }
   },
 
