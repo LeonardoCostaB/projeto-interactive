@@ -12,6 +12,16 @@
   @extend .box-shadow;
 }
 
+.post-mobile {
+  display: none;
+
+  background-color: $color-white;
+
+  border-radius: .6rem;
+
+  @extend .box-shadow;
+}
+
 .reply-user, .reply-profile {
   @extend .grid-center;
 
@@ -20,6 +30,16 @@
   width: 90%;
   
   padding: 2rem 0;
+
+  border-radius: .6rem;
+
+  @extend .box-shadow;
+}
+
+.reply-user-mobile, .reply-profile-mobile {
+  display: none;
+  
+  background-color: white;
 
   border-radius: .6rem;
 

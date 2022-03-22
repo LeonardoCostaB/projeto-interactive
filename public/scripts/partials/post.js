@@ -1,9 +1,9 @@
 import utils from '../utils/utils.js'
 
 const post = {
-  postUsers(){
-    const post = document.querySelectorAll('.post.users')
+  postUsers(post) {
     const modal = document.querySelectorAll('.modal-post')
+    // const post = document.querySelector('.post.profile')
     
     for(let poster of post){
       const id = poster.dataset.id
@@ -33,18 +33,15 @@ const post = {
     }
   },
 
-  updatePost(){
-    const post = document.querySelectorAll('.post.profile')
-
+  updatePost(post) {
     utils.update(post)
   },
 
-  deletePost(){
+  deletePost(post) {
     const roomId = document.querySelector('main').dataset.id
     
     const cancell = document.querySelector('.modal-wrapper .cancell')
 
-    const post = document.querySelectorAll('.post.profile')
     const deleteForm = document.querySelector('#delete-post')
 
     for(let poster of post){

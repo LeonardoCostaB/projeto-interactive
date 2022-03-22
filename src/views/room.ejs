@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,6 +43,8 @@
          
         <% post.forEach(element => { %>
           <% if(element.room == roomId) { %>
+
+            <!-- Post referente do usário logado -->
            
             <div class="post profile" data-id="<%= element.id %>">
               <div class="score">
@@ -100,8 +102,68 @@
 
             </div>
 
+            <div class="post-mobile profile" data-id="<%= element.id %>">
+              <div class="apresentation">
+                <div class="header-profile">
+
+                  <div class="identification">
+                    <img class="img-user" src="<%= element.photo_url %>" alt="Foto-<%= element.user %>">
+      
+                    <p class="name-user"><%= element.user %></p>
+      
+                    <p class="you">you</p>
+    
+                    <p class="timer">
+                      <%= element.remaining %>             
+                    </p>
+                  </div>
+                </div>
+      
+                <div class="content-user">
+                  <p><%= element.content %></p>
+                </div>
+
+                <div class="container">
+                  <div class="score">
+                    <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                    <p class="score-value"><%= element.score %></p>
+                    <img src="/images/icons/icon-minus.svg" alt="icon-score-less">
+                  </div>
+
+                  <div class="edit-delete">
+                    <div class="delete">
+                      <img src="/images/icons/icon-delete.svg" alt="deletar">
+    
+                      <button>Deletar</button>
+                    </div>
+                    
+                    <div class="edit">
+                      <img src="/images/icons/icon-edit.svg" alt="editar">
+                      <button>Editar</button>
+                    </div>
+                  </div>
+                </div>
+    
+                <div class="update hidde">
+                  <form action="/update/<%= element.id %>/<%= roomId %>" method="POST" id="update">
+                    <textarea 
+                    name="update" 
+                    id="update" 
+                    cols="30" 
+                    rows="10"
+                    ><%= element.content %></textarea>
+                    <div class="button-update">
+                      <button>Salvar</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
             <% reply.forEach(reply => { %>
               <% if(element.id === reply.post_id) {%>
+
+                <!-- Sessão de respostas do usuário logado -->
 
                 <section id="reply" data-id="<%= element.id %>">
                   <div class="line"></div>
@@ -145,6 +207,65 @@
               
                         <div class="content-user">
                           <p><span>@<%= element.user %></span> <%= reply.content %></p>
+                        </div>
+            
+                        <div class="update hidde">
+                          <form action="/updateReply/<%= reply.id %>/<%= roomId %>" method="POST" id="update">
+                            <textarea 
+                            name="updateReply" 
+                            id="update" 
+                            cols="30" 
+                            rows="10"
+                            ><%= reply.content %></textarea>
+                            <div class="button-update">
+                              <button>Salvar</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="reply-profile-mobile" data-id="<%= reply.id %>">
+                      <div class="apresentation">
+                        <div class="header-profile">
+                          <div class="identification">
+                            <img class="img-user" src="<%= reply.photo_url %>" alt="Foto-<%= reply.user %>">
+              
+                            <p class="name-user"><%= reply.user %></p>
+              
+                            <p class="you">you</p>
+            
+                            <p class="timer">
+                              <%= reply.remaining %>
+                            </p>
+                          </div>
+              
+                          
+                        </div>
+              
+                        <div class="content-user">
+                          <p><span>@<%= element.user %></span> <%= reply.content %></p>
+                        </div>
+
+                        <div class="container">
+                          <div class="score">
+                            <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                            <p class="score-value"><%= reply.score %></p>
+                            <img src="/images/icons/icon-minus.svg" alt="icon-score-less">
+                          </div>
+
+                          <div class="edit-delete">
+                            <div class="delete">
+                              <img src="/images/icons/icon-delete.svg" alt="deletar">
+            
+                              <button>Deletar</button>
+                            </div>
+                            
+                            <div class="edit">
+                              <img src="/images/icons/icon-edit.svg" alt="editar">
+                              <button>Editar</button>
+                            </div>
+                          </div>
                         </div>
             
                         <div class="update hidde">
@@ -289,6 +410,40 @@
                       </div>
                     </div>
                     </div>
+
+                    <div class="reply-user-mobile" data-id="<%= reply.id %>">
+                      <div class="apresentation">
+                        <div class="header">
+                          <div class="identification">
+                            <img class="img-user" src="<%= reply.photo_url %>" alt="user-image">
+              
+                            <p class="name-user"><%= reply.user %></p>
+              
+                            <p class="timer">
+                              <%= reply.remaining %>
+                            </p>
+                          </div>
+                        </div>
+              
+                        <div class="content-user">
+                          <p><span>@<%= element.user %></span> <%= reply.content %></p>
+                        </div>
+
+                        <div class="container">
+                          <div class="score">
+                            <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                            <p class="score-value"><%= reply.score %></p>
+                            <img src="/images/icons/icon-minus.svg" alt="icon-score">
+                          </div>
+
+                          <div class="reply">
+                            <img src="/images/icons/icon-reply.svg" alt="reply">
+              
+                            <p>Reply</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
           
                     <div class="modal-reply" data-id="<%= reply.id %>">
                       <div class="image">
@@ -368,6 +523,63 @@
                           </div>
                         </div>
 
+                        <div class="reply-profile-mobile" data-id="<%= secondary.id %>">
+                          <div class="apresentation">
+                            <div class="header-profile">
+                              <div class="identification">
+                                <img class="img-user" src="<%= secondary.photo_url %>" alt="Foto-<%= secondary.user %>">
+                  
+                                <p class="name-user"><%= secondary.user %></p>
+                  
+                                <p class="you">you</p>
+                
+                                <p class="timer">
+                                  <%= secondary.remaining %>
+                                </p>
+                              </div>
+                            </div>
+                  
+                            <div class="content-user">
+                              <p><span>@<%= reply.user %></span> <%= secondary.content %></p>
+                            </div>
+
+                            <div class="container">
+                              <div class="score">
+                                <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                                <p class="score-value"><%= reply.score %></p>
+                                <img src="/images/icons/icon-minus.svg" alt="icon-score-less">
+                              </div>
+
+                              <div class="edit-delete">
+                                <div class="delete">
+                                  <img src="/images/icons/icon-delete.svg" alt="deletar">
+                
+                                  <button>Deletar</button>
+                                </div>
+                                
+                                <div class="edit">
+                                  <img src="/images/icons/icon-edit.svg" alt="editar">
+                                  <button>Editar</button>
+                                </div>
+                              </div>
+                            </div>
+                
+                            <div class="update hidde">
+                              <form action="/updateReply/<%= reply.id %>/<%= roomId %>" method="POST" id="update">
+                                <textarea 
+                                name="updateReply" 
+                                id="update" 
+                                cols="30" 
+                                rows="10"
+                                ><%= secondary.content %></textarea>
+                                <div class="button-update">
+                                  <button>Salvar</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+
                       <% } else {%>
 
                         <div class="reply-user" data-id="<%= secondary.id %>">
@@ -397,6 +609,36 @@
 
                           </div>
                         </div>
+
+                        <div class="reply-user-mobile" data-id="<%= secondary.id %>">
+                          <div class="apresentation">
+                            <div class="header">
+                              <div class="identification">
+                                <img class="img-user" src="<%= secondary.photo_url %>" alt="user-image">
+                  
+                                <p class="name-user"><%= secondary.user %></p>
+                  
+                                <p class="timer">
+                                  <%= secondary.remaining %> 
+                                </p>
+                              </div>
+                
+                            </div>
+                  
+                            <div class="content-user">
+                              <p><span>@<%= reply.user %></span> <%= secondary.content %></p>
+                            </div>
+
+                            <div class="container">
+                              <div class="score">
+                                <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                                <p class="score-value"><%= secondary.score %></p>
+                                <img src="/images/icons/icon-minus.svg" alt="icon-score">
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
                 
                       <% } %> 
                       <% } %> 
@@ -410,6 +652,8 @@
 
           <% } else { %>
 
+            <!-- Post referente aos demais usuários do app -->
+
             <div class="post users" data-id="<%= element.id %>">
               <div class="score">
                   <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
@@ -421,9 +665,12 @@
 
               <div class="apresentation">
                 <div class="header">
+
                   <div class="identification">
                     <img class="img-user" src="<%= element.photo_url %>" alt="user-image">
+
                     <p class="name-user"><%= element.user %></p>
+
                     <p class="timer">
                       <%= element.remaining %>
                     </p>
@@ -437,6 +684,40 @@
 
                 <div class="content-user">
                   <p><%= element.content %></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="post-mobile users" data-id="<%= element.id %>">
+              <div class="apresentation">
+
+                <div class="header">
+                  <div class="identification">
+                    <img class="img-user" src="<%= element.photo_url %>" alt="user-image">
+                    <p class="name-user"><%= element.user %></p>
+                    <p class="timer">
+                      <%= element.remaining %>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="content-user">
+                  <p><%= element.content %></p>
+                </div>
+
+                <div class="container">
+                  <div class="score">
+                    <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+    
+                    <p class="score-value"><%= element.score %></p>
+    
+                    <img src="/images/icons/icon-minus.svg" alt="icon-score">
+                  </div>
+
+                  <div class="reply">
+                    <img src="/images//icons/icon-reply.svg" alt="reply">
+                    <p>Reply</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -462,6 +743,8 @@
 
             <% reply.forEach(reply => { %>
               <% if(element.id === reply.post_id) {%>
+
+                <!-- Sessão referente ao post dos usuários app -->
 
                 <section id="reply" data-id="<%= element.id %>">
                   <div class="line"></div>
@@ -506,7 +789,66 @@
                         <div class="content-user">
                           <p><span>@<%= element.user %></span> <%= reply.content %></p>
                         </div>
-                        
+            
+                        <div class="update hidde">
+                          <form action="/updateReply/<%= reply.id %>/<%= roomId %>" method="POST" id="update">
+                            <textarea 
+                            name="updateReply" 
+                            id="update" 
+                            cols="30" 
+                            rows="10"
+                            ><%= reply.content %></textarea>
+                            <div class="button-update">
+                              <button>Salvar</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="reply-profile-mobile" data-id="<%= reply.id %>">
+                      <div class="apresentation">
+                        <div class="header-profile">
+                          <div class="identification">
+                            <img class="img-user" src="<%= reply.photo_url %>" alt="Foto-<%= reply.user %>">
+              
+                            <p class="name-user"><%= reply.user %></p>
+              
+                            <p class="you">you</p>
+            
+                            <p class="timer">
+                              <%= reply.remaining %>
+                            </p>
+                          </div>
+              
+                          
+                        </div>
+              
+                        <div class="content-user">
+                          <p><span>@<%= element.user %></span> <%= reply.content %></p>
+                        </div>
+
+                        <div class="container">
+                          <div class="score">
+                            <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                            <p class="score-value"><%= reply.score %></p>
+                            <img src="/images/icons/icon-minus.svg" alt="icon-score-less">
+                          </div>
+
+                          <div class="edit-delete">
+                            <div class="delete">
+                              <img src="/images/icons/icon-delete.svg" alt="deletar">
+            
+                              <button>Deletar</button>
+                            </div>
+                            
+                            <div class="edit">
+                              <img src="/images/icons/icon-edit.svg" alt="editar">
+                              <button>Editar</button>
+                            </div>
+                          </div>
+                        </div>
+            
                         <div class="update hidde">
                           <form action="/updateReply/<%= reply.id %>/<%= roomId %>" method="POST" id="update">
                             <textarea 
@@ -524,7 +866,7 @@
                     </div>
 
                     <% secondary.forEach(secondary => { %>
-                      <% if(reply.id === secondary.post_id) {%> 
+                      <% if(reply.id === secondary.post_id){ %> 
                       <% if(secondary.room == roomId) {%> 
 
                       <div class="reply-profile" data-id="<%= secondary.id %>">
@@ -563,7 +905,7 @@
                           </div>
                 
                           <div class="content-user">
-                            <p><span>@<%= reply.user %> </span><%= secondary.content %></p>
+                            <p><span>@<%= reply.user %></span> <%= secondary.content %></p>
                           </div>
               
                           <div class="update hidde">
@@ -602,7 +944,7 @@
                                   <%= secondary.remaining %>
                                 </p>
                               </div>
-  
+                  
                             </div>
                   
                             <div class="content-user">
@@ -647,27 +989,60 @@
                       <div class="content-user">
                         <p><span>@<%= element.user %></span> <%= reply.content %></p>
                       </div>
-
                     </div>
+                    </div>
+
+                    <div class="reply-user-mobile" data-id="<%= reply.id %>">
+                      <div class="apresentation">
+                        <div class="header">
+                          <div class="identification">
+                            <img class="img-user" src="<%= reply.photo_url %>" alt="user-image">
+              
+                            <p class="name-user"><%= reply.user %></p>
+              
+                            <p class="timer">
+                              <%= reply.remaining %>
+                            </p>
+                          </div>
+                        </div>
+              
+                        <div class="content-user">
+                          <p><span>@<%= element.user %></span> <%= reply.content %></p>
+                        </div>
+
+                        <div class="container">
+                          <div class="score">
+                            <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                            <p class="score-value"><%= reply.score %></p>
+                            <img src="/images/icons/icon-minus.svg" alt="icon-score">
+                          </div>
+
+                          <div class="reply">
+                            <img src="/images/icons/icon-reply.svg" alt="reply">
+              
+                            <p>Reply</p>
+                          </div>
+                        </div>
+                      </div>
                     </div>
           
                     <div class="modal-reply" data-id="<%= reply.id %>">
                       <div class="image">
-                        <img class="img-user" src="<%= profile.url  %>" alt="foto-usuario">
+                        <img src="<%= profile.url %>" alt="<%= element.user %>" title="<%= element.user %>">
                       </div>
                 
                       <div class="form-reply">
                         <div class="post-referencie">
-                          <p>Repondendo a @<%= reply.user %></p>
-                          
-                          <form action="/replySecondary" method="POST" id="form-secondary">
+                          <p>Respondendo a @<%= reply.user %></p>
+        
+                          <form  action="/replySecondary" method="POST" id="form-secondary">
                             <textarea name="replySecondary" id="reply-user" cols="30" rows="6"></textarea>
                           </form>
                         </div>
                         
                         <button form="form-secondary" type="submit">Responder</button>
                       </div>
-  
+        
                     </div>
 
                     <% secondary.forEach(secondary => { %>
@@ -729,6 +1104,63 @@
                           </div>
                         </div>
 
+                        <div class="reply-profile-mobile" data-id="<%= secondary.id %>">
+                          <div class="apresentation">
+                            <div class="header-profile">
+                              <div class="identification">
+                                <img class="img-user" src="<%= secondary.photo_url %>" alt="Foto-<%= secondary.user %>">
+                  
+                                <p class="name-user"><%= secondary.user %></p>
+                  
+                                <p class="you">you</p>
+                
+                                <p class="timer">
+                                  <%= secondary.remaining %>
+                                </p>
+                              </div>
+                            </div>
+                  
+                            <div class="content-user">
+                              <p><span>@<%= reply.user %></span> <%= secondary.content %></p>
+                            </div>
+
+                            <div class="container">
+                              <div class="score">
+                                <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                                <p class="score-value"><%= reply.score %></p>
+                                <img src="/images/icons/icon-minus.svg" alt="icon-score-less">
+                              </div>
+
+                              <div class="edit-delete">
+                                <div class="delete">
+                                  <img src="/images/icons/icon-delete.svg" alt="deletar">
+                
+                                  <button>Deletar</button>
+                                </div>
+                                
+                                <div class="edit">
+                                  <img src="/images/icons/icon-edit.svg" alt="editar">
+                                  <button>Editar</button>
+                                </div>
+                              </div>
+                            </div>
+                
+                            <div class="update hidde">
+                              <form action="/updateReply/<%= reply.id %>/<%= roomId %>" method="POST" id="update">
+                                <textarea 
+                                name="updateReply" 
+                                id="update" 
+                                cols="30" 
+                                rows="10"
+                                ><%= secondary.content %></textarea>
+                                <div class="button-update">
+                                  <button>Salvar</button>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+
                       <% } else {%>
 
                         <div class="reply-user" data-id="<%= secondary.id %>">
@@ -746,10 +1178,10 @@
                                 <p class="name-user"><%= secondary.user %></p>
                   
                                 <p class="timer">
-                                  <%= secondary.remaining %>
+                                  <%= secondary.remaining %> 
                                 </p>
                               </div>
-                  
+                
                             </div>
                   
                             <div class="content-user">
@@ -759,6 +1191,36 @@
                           </div>
                         </div>
 
+                        <div class="reply-user-mobile" data-id="<%= secondary.id %>">
+                          <div class="apresentation">
+                            <div class="header">
+                              <div class="identification">
+                                <img class="img-user" src="<%= secondary.photo_url %>" alt="user-image">
+                  
+                                <p class="name-user"><%= secondary.user %></p>
+                  
+                                <p class="timer">
+                                  <%= secondary.remaining %> 
+                                </p>
+                              </div>
+                
+                            </div>
+                  
+                            <div class="content-user">
+                              <p><span>@<%= reply.user %></span> <%= secondary.content %></p>
+                            </div>
+
+                            <div class="container">
+                              <div class="score">
+                                <img src="/images/icons/icon-plus.svg" alt="icon-score-more">
+                                <p class="score-value"><%= secondary.score %></p>
+                                <img src="/images/icons/icon-minus.svg" alt="icon-score">
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                
                       <% } %> 
                       <% } %> 
                     <% }) %> 
@@ -792,6 +1254,13 @@
           </form>
           <button form="form-footer" class="disabled">Postar</button>
 
+          <div class="container-footer">
+            <div class="image-mobile-footer">
+              <img src="<%= profile.url %>" alt="foto-usuario">
+            </div>
+
+            <button class="disabled" form="form-footer">Postar</button>
+          </div>
         </div>
       </footer>
     </main>

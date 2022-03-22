@@ -62,12 +62,17 @@
   }
   
   .post {
+    display: none;
+  }
+  
+  .post-mobile {
     display: block;
 
     width: 95%;
-
+  
     padding: 2rem;
     margin: auto;
+
   }
 
   .container {
@@ -120,8 +125,14 @@
     width: 97.3%;
 
     .reply-profile, .reply-user {
+      display: none;
+    }
+
+    .reply-profile-mobile, .reply-user-mobile {
       display: block;
       padding: 2rem;
+
+      width: 90%;
     }
   }
 
@@ -130,18 +141,40 @@
     margin: auto;
 
     .image {
-      width: 8%;
-      padding-left: 0;
-      margin-left: 2rem;
+      display: none;
     }
 
     form {
       width: 95%;
-      margin: auto;
+      margin: 0 auto 2rem;
     }
 
     button {
-      margin-right: 2rem;
+      display: none;
+    }
+
+    .container-footer {
+      display: flex; 
+      align-content: center; 
+      justify-content: space-between;
+
+      .image-mobile-footer {
+        width: 8%;
+        padding-left: 0;
+        margin-left: 2rem;
+      }
+
+      button {
+        display: block;
+
+        margin-right: 2rem;
+
+        width: 25%;
+
+        &.disabled {
+          filter: contrast(.6);
+        }
+      }
     }
   }
 

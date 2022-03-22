@@ -1,10 +1,9 @@
 import utils from '../utils/utils.js'
 
 const comments = {
-  reply(){
+  reply(reply){
     const roomId = document.querySelector('main').dataset.id
     
-    const reply = document.querySelectorAll('.reply-user')
     const modal = document.querySelectorAll('.modal-reply')
 
     for(let post of reply){
@@ -36,18 +35,15 @@ const comments = {
     }
   },
 
-  updateReply(){
-    const reply = document.querySelectorAll('.reply-profile')
-
+  updateReply(reply){
     utils.update(reply)
   },
   
-  deleteReply(){
+  deleteReply(reply){
     const roomId = document.querySelector('main').dataset.id
     
     const cancell = document.querySelector('.modal-wrapper .cancell')
 
-    const reply = document.querySelectorAll('.reply-profile')
     const deleteForm = document.querySelector('#delete-reply')
 
     for(let post of reply){
